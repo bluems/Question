@@ -3,8 +3,7 @@ program QServer;
 uses
   Vcl.Forms,
   uMain in 'uMain.pas' {MainFrm},
-  uSettings in 'uSettings.pas' {SettingsFrm},
-  uClient in 'uClient.pas';
+  uSettings in 'uSettings.pas' {SettingsFrm};
 
 {$R *.res}
 

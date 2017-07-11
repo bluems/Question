@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer;
+  Vcl.StdCtrls, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer,
+  System.Win.ScktComp;
 
 type
   TMainFrm = class(TForm)
@@ -53,10 +54,14 @@ type
     ImageRed: TImage;
     ImageSky: TImage;
     ImageGray: TImage;
-    IdTCPServer1: TIdTCPServer;
+    ServerSocket1: TServerSocket;
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure ServerSocket1ClientRead(Sender: TObject;
+      Socket: TCustomWinSocket);
   private
     { Private declarations }
     FPort: integer;
@@ -65,6 +70,7 @@ type
     { Public declarations }
     procedure SetPort(Const Value: integer);
     procedure SetIP(Const Value: string);
+    procedure ServerInfoRedraw(Const Aip: string; Const Aport: integer);
     property Port: integer read FPort write SetPort;
     property IP: string read FIP write SetIP;
   end;
@@ -115,6 +121,7 @@ begin
   finally
     SettingsFrm.Free;
     SettingsFrm := nil;
+    ServerInfoRedraw(IP, Port);
   end;
 
 end;
@@ -124,16 +131,47 @@ begin
   MainFrm.Close;
 end;
 
+procedure TMainFrm.Button3Click(Sender: TObject);
+begin
+  if ServerSocket1.Active = false then
+  begin
+    ServerSocket1.Port := Port;
+    ServerSocket1.Active := true;
+    (Sender As TButton).Caption := 'Stop';
+  end
+  else
+  begin
+    ServerSocket1.Active := false;
+    (Sender As TButton).Caption := 'Run';
+  end;
+end;
+
+procedure TMainFrm.FormCreate(Sender: TObject);
+begin
+  Port := 3030;
+end;
+
 procedure TMainFrm.FormShow(Sender: TObject);
 begin
-  IP:=My_LocalIP;
-  lblIP.Caption := 'IP : ' + IP;
+  IP := My_LocalIP;
+  ServerInfoRedraw(IP, Port);
+end;
+
+procedure TMainFrm.ServerInfoRedraw(const Aip: string; const Aport: integer);
+begin
+  lblIP.Caption := 'IP : ' + Aip + ' / Port : ' + inttostr(Aport);
+end;
+
+procedure TMainFrm.ServerSocket1ClientRead(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  showmessage(Socket.ReceiveText);
 end;
 
 procedure TMainFrm.SetIP(const Value: string);
 begin
   if FIP <> Value then
-    FIP:=Value;
+    FIP := Value;
 end;
 
 procedure TMainFrm.SetPort(const Value: integer);
@@ -141,7 +179,5 @@ begin
   if FPort <> Value then
     FPort := Value;
 end;
-
-
 
 end.

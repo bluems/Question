@@ -40,6 +40,7 @@ object SettingsFrm: TSettingsFrm
     ParentFont = False
     TabOrder = 0
     Text = '3030'
+    OnKeyUp = Edit1KeyUp
   end
   object Button1: TButton
     Left = 40

@@ -11,6 +11,7 @@ object MainFrm: TMainFrm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -16539,6 +16540,7 @@ object MainFrm: TMainFrm
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      Transparent = True
     end
   end
   object Button1: TButton
@@ -16566,11 +16568,14 @@ object MainFrm: TMainFrm
     Height = 47
     Caption = 'Run'
     TabOrder = 3
+    OnClick = Button3Click
   end
-  object IdTCPServer1: TIdTCPServer
-    Bindings = <>
-    DefaultPort = 0
+  object ServerSocket1: TServerSocket
+    Active = False
+    Port = 3030
+    ServerType = stNonBlocking
+    OnClientRead = ServerSocket1ClientRead
     Left = 368
-    Top = 24
+    Top = 176
   end
 end

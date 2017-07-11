@@ -17,6 +17,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 
   private
     { Private declarations }
@@ -45,6 +46,13 @@ begin
   showmessage(inttostr(FPort));
 end;
 
+
+procedure TSettingsFrm.Edit1KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = 13 then
+  button1.Click;
+end;
 
 procedure TSettingsFrm.FormShow(Sender: TObject);
 begin
