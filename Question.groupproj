@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2B76742D-C447-40CB-A1DB-82170F2EB7FE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Client\QClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\QServer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="QClient">
+        <MSBuild Projects="Client\QClient.dproj"/>
+    </Target>
+    <Target Name="QClient:Clean">
+        <MSBuild Projects="Client\QClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="QClient:Make">
+        <MSBuild Projects="Client\QClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="QServer">
+        <MSBuild Projects="Server\QServer.dproj"/>
+    </Target>
+    <Target Name="QServer:Clean">
+        <MSBuild Projects="Server\QServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="QServer:Make">
+        <MSBuild Projects="Server\QServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="QClient;QServer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="QClient:Clean;QServer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="QClient:Make;QServer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
