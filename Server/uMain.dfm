@@ -11,6 +11,7 @@ object MainFrm: TMainFrm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object ImageRed: TImage
@@ -16526,7 +16527,7 @@ object MainFrm: TMainFrm
       Height = 105
       Stretch = True
     end
-    object Label1: TLabel
+    object lblIP: TLabel
       Left = 16
       Top = 607
       Width = 51
@@ -16565,5 +16566,11 @@ object MainFrm: TMainFrm
     Height = 47
     Caption = 'Run'
     TabOrder = 3
+  end
+  object IdTCPServer1: TIdTCPServer
+    Bindings = <>
+    DefaultPort = 0
+    Left = 368
+    Top = 24
   end
 end
