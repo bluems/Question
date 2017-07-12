@@ -785,7 +785,7 @@ object LoginFrm: TLoginFrm
   end
   object SpeedButton1: TSpeedButton
     Left = 48
-    Top = 272
+    Top = 266
     Width = 305
     Height = 60
     Caption = 'Login'
@@ -796,6 +796,7 @@ object LoginFrm: TLoginFrm
     Font.Name = #47569#51008' '#44256#46357
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton1Click
   end
   object SpeedButton2: TSpeedButton
     Left = 48
@@ -810,7 +811,7 @@ object LoginFrm: TLoginFrm
     Font.Name = #47569#51008' '#44256#46357
     Font.Style = [fsBold]
     ParentFont = False
-    OnClick = Button1Click
+    OnClick = SpeedButton2Click
   end
   object edtPC: TEdit
     Left = 72
@@ -827,7 +828,7 @@ object LoginFrm: TLoginFrm
     ParentFont = False
     TabOrder = 0
   end
-  object Edit2: TEdit
+  object edtName: TEdit
     Left = 72
     Top = 144
     Width = 257
