@@ -33,18 +33,12 @@ type
   end;
 
   function Login(var PCName: String; var UserName:String) : boolean;
-var
-  LoginFrm: TLoginFrm;
+{var
+  LoginFrm: TLoginFrm;   }
 
 implementation
 
 {$R *.dfm}
-
-procedure TLoginFrm.FormCanResize(Sender: TObject;
-  var NewWidth, NewHeight: Integer; var Resize: Boolean);
-begin
-  Resize := false;
-end;
 
 function Login(var PCName, UserName: String): Boolean;
 var
@@ -64,6 +58,12 @@ begin
   end;
 end;
 
+procedure TLoginFrm.FormCanResize(Sender: TObject;
+  var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  Resize := false;
+end;
+
 procedure TLoginFrm.SetPCName(const AValue: string);
 begin
   if FPCName <> AValue then
@@ -77,11 +77,34 @@ begin
 end;
 
 procedure TLoginFrm.SpeedButton1Click(Sender: TObject);
+var
+  LUserNAme, LPcName:string;
 begin
-  if edtPC.Text = '' then
+  LPcName := trim(edtPc.Text);
+  LUserName:= trim(edtName.Text);
+
+  if LPcNAme = '' then
+  begin
+    ShowMessage('PC번호를 입력하세요.');
+    exit;
+  end;
+
+  if LUserName = '' then
+  begin
+    ShowMessage('사용자 이름을 입력하세요');
+    exit;
+  end;
+
+  FPCName := LPcName;
+  FUserName:= LUserName;
+
+  Modalresult:=mrOK;
+
+
+  {if edtPC.Text = '' then
   begin
     showmessage('PC번호를 입력하세요');
-    SetPCName(edtPC.Text);
+    //SetPCName(edtPC.Text);
   end
   else if edtName.Text = '' then
   begin
@@ -91,15 +114,13 @@ begin
   else
   begin
     modalresult := mrOk;
-    LoginFrm.Close;
 
-  end;
+  end;  }
 
 end;
 
 procedure TLoginFrm.SpeedButton2Click(Sender: TObject);
 begin
-  LoginFrm.Close;
   modalresult := mrCancel;
 end;
 

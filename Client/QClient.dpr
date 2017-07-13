@@ -13,14 +13,15 @@ var
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TMainFrm, MainFrm);
+
   //Application.CreateForm(TLoginFrm, LoginFrm);
-  if LoginFrm.Login(PCName,UserName) then
+  if Login(PCName,UserName) then
   begin
+  Application.CreateForm(TMainFrm, MainFrm);
   MainFrm.pcName:=pcname;
-  MainFrm.userName:=username;
+  MainFrm.userName:=UserName;
   Application.Run;
   end
   else
-  Application.Terminate;
+    Application.Terminate;
 end.

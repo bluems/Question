@@ -13,7 +13,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     procedure Button1Click(Sender: TObject);
-
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -44,24 +43,10 @@ end;
 
 
 procedure TMainFrm.FormShow(Sender: TObject);
-var
-  LoginFrm: TLoginFrm;
 begin
-  LoginFrm := TLoginFrm.Create(application);
-
-  if LoginFrm.ShowModal = mrOK then
-  begin
-    SetPCName(LoginFrm.pcName);
-    SetUserName(LoginFrm.userName);
-  end
-  else
-    MainFrm.Close;
-
-  LoginFrm.Free;
-      Label1.Caption := pcName;
-  Label2.Caption := userName;
+  Label1.Caption:=pcname;
+  Label2.Caption:=username;
 end;
-
 
 procedure TMainFrm.SetPCName(const AValue: string);
 begin
