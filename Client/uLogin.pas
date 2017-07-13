@@ -25,12 +25,14 @@ type
     FUserName: string;
   public
     { Public declarations }
+   // function Login(var PCName, UserName: String): Boolean;
     procedure SetPCName(const AValue: string);
     procedure SetUserName(const AValue: string);
-    property pcName: string read FPCName write SetPCName;
-    property userName: string read FUserName write SetUserName;
+    property PCName: string read FPCName write SetPCName;
+    property UserName: string read FUserName write SetUserName;
   end;
 
+  function Login(var PCName: String; var UserName:String) : boolean;
 var
   LoginFrm: TLoginFrm;
 
@@ -42,6 +44,24 @@ procedure TLoginFrm.FormCanResize(Sender: TObject;
   var NewWidth, NewHeight: Integer; var Resize: Boolean);
 begin
   Resize := false;
+end;
+
+function Login(var PCName, UserName: String): Boolean;
+var
+  LLoginView: TLoginFrm;
+begin
+  LLoginView := TLoginFrm.Create(nil);
+  try
+    Result := LLoginView.Showmodal = mrOk;
+
+    if Result then
+    begin
+      PCName := LLoginView.PCName;
+      UserName := LLoginView.UserName;
+    end;
+  finally
+    LLoginView.Free;
+  end;
 end;
 
 procedure TLoginFrm.SetPCName(const AValue: string);
@@ -70,8 +90,8 @@ begin
   end
   else
   begin
-  modalresult:=mrOk;
-    loginfrm.Close;
+    modalresult := mrOk;
+    LoginFrm.Close;
 
   end;
 
@@ -79,8 +99,8 @@ end;
 
 procedure TLoginFrm.SpeedButton2Click(Sender: TObject);
 begin
-  loginfrm.Close;
-  modalResult:=mrCancel;
+  LoginFrm.Close;
+  modalresult := mrCancel;
 end;
 
 end.
