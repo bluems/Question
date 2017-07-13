@@ -11,6 +11,7 @@ var
   UserName:String;
 
 begin
+System.ReportMemoryLeaksOnShutdown:= True;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
