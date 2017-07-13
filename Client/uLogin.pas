@@ -25,16 +25,16 @@ type
     FUserName: string;
   public
     { Public declarations }
-   // function Login(var PCName, UserName: String): Boolean;
+    // function Login(var PCName, UserName: String): Boolean;
     procedure SetPCName(const AValue: string);
     procedure SetUserName(const AValue: string);
     property PCName: string read FPCName write SetPCName;
     property UserName: string read FUserName write SetUserName;
   end;
 
-  function Login(var PCName: String; var UserName:String) : boolean;
-{var
-  LoginFrm: TLoginFrm;   }
+function Login(var PCName: String; var UserName: String): Boolean;
+{ var
+  LoginFrm: TLoginFrm; }
 
 implementation
 
@@ -67,61 +67,49 @@ end;
 procedure TLoginFrm.SetPCName(const AValue: string);
 begin
   if FPCName <> AValue then
+  begin
     FPCName := AValue;
+  end;
 end;
 
 procedure TLoginFrm.SetUserName(const AValue: string);
 begin
   if FUserName <> AValue then
+  begin
     FUserName := AValue;
+  end;
+
 end;
 
 procedure TLoginFrm.SpeedButton1Click(Sender: TObject);
 var
-  LUserNAme, LPcName:string;
+  LUserNAme, LPcName: string;
 begin
-  LPcName := trim(edtPc.Text);
-  LUserName:= trim(edtName.Text);
+  LPcName := trim(edtPC.Text);
+  LUserNAme := trim(edtName.Text);
 
-  if LPcNAme = '' then
+  if LPcName = '' then
   begin
     ShowMessage('PC번호를 입력하세요.');
     exit;
   end;
 
-  if LUserName = '' then
+  if LUserNAme = '' then
   begin
     ShowMessage('사용자 이름을 입력하세요');
     exit;
   end;
 
   FPCName := LPcName;
-  FUserName:= LUserName;
+  FUserName := LUserNAme;
 
-  Modalresult:=mrOK;
-
-
-  {if edtPC.Text = '' then
-  begin
-    showmessage('PC번호를 입력하세요');
-    //SetPCName(edtPC.Text);
-  end
-  else if edtName.Text = '' then
-  begin
-    showmessage('사용자 이름을 입력하세요');
-    SetUserName(edtName.Text);
-  end
-  else
-  begin
-    modalresult := mrOk;
-
-  end;  }
+  Modalresult := mrOk;
 
 end;
 
 procedure TLoginFrm.SpeedButton2Click(Sender: TObject);
 begin
-  modalresult := mrCancel;
+  Modalresult := mrCancel;
 end;
 
 end.

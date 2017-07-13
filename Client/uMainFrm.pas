@@ -37,27 +37,29 @@ uses uLogin;
 
 procedure TMainFrm.Button1Click(Sender: TObject);
 begin
-  MainFrm.Close;
-
+  application.Terminate;
 end;
-
 
 procedure TMainFrm.FormShow(Sender: TObject);
 begin
-  Label1.Caption:=pcname;
-  Label2.Caption:=username;
+  Label1.Caption := pcName;
+  Label2.Caption := userName;
 end;
 
 procedure TMainFrm.SetPCName(const AValue: string);
 begin
   if FPCName <> AValue then
+  begin
     FPCName := AValue;
+  end;
 end;
 
 procedure TMainFrm.SetUserName(const AValue: string);
 begin
   if FUserName <> AValue then
+  begin
     FUserName := AValue;
+  end;
 end;
 
 end.
