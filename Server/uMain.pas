@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   Vcl.StdCtrls, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer,
-  System.Win.ScktComp;
+  System.Win.ScktComp, System.ImageList, Vcl.ImgList;
 
 type
   TMainFrm = class(TForm)
@@ -16,11 +16,46 @@ type
     Button2: TButton;
     Button3: TButton;
     lblIP: TLabel;
-    ImageRed: TImage;
-    ImageSky: TImage;
-    ImageGray: TImage;
     ServerSocket1: TServerSocket;
     Memo1: TMemo;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Image9: TImage;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    Image13: TImage;
+    Image14: TImage;
+    Image15: TImage;
+    Image16: TImage;
+    Image17: TImage;
+    Image18: TImage;
+    Image19: TImage;
+    Image20: TImage;
+    Image21: TImage;
+    Image22: TImage;
+    Image23: TImage;
+    Image24: TImage;
+    Image25: TImage;
+    Image26: TImage;
+    Image27: TImage;
+    Image28: TImage;
+    Image29: TImage;
+    Image30: TImage;
+    Image31: TImage;
+    Image32: TImage;
+    Image33: TImage;
+    Image34: TImage;
+    Image35: TImage;
+    GrayImage: TImage;
+    RedImage: TImage;
+    SkyImage: TImage;
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -36,6 +71,8 @@ type
     { Private declarations }
     FPort: integer;
     FIP: string;
+    imgCount:integer;
+    myImg: array of TImage;
   public
     { Public declarations }
     procedure SetPort(Const Value: integer);
@@ -117,50 +154,27 @@ begin
 end;
 
 procedure TMainFrm.FormCreate(Sender: TObject);
+var
+  i:integer;
 begin
   Port := 3030;
+  SetLength(myImg,36);
+  for i := 1 to 35 do
+    begin
+       myImg[i]:=(FindComponent('Image'+inttostr(i)) as Timage);
+       myImg[i].Stretch:=true;
+       myImg[i].Picture:=GrayImage.Picture;
+    end;
+
+
 end;
 
 procedure TMainFrm.FormShow(Sender: TObject);
 begin
   IP := My_LocalIP;
   ServerInfoRedraw(IP, Port);
- { GImage1.Picture := ImageGray.Picture;
-  GImage2.Picture := ImageGray.Picture;
-  GImage3.Picture := ImageGray.Picture;
-  GImage4.Picture := ImageGray.Picture;
-  GImage5.Picture := ImageGray.Picture;
-  GImage6.Picture := ImageGray.Picture;
-  GImage7.Picture := ImageGray.Picture;
-  GImage8.Picture := ImageGray.Picture;
-  GImage9.Picture := ImageGray.Picture;
-  GImage10.Picture := ImageGray.Picture;
-  GImage11.Picture := ImageGray.Picture;
-  GImage12.Picture := ImageGray.Picture;
-  GImage13.Picture := ImageGray.Picture;
-  GImage14.Picture := ImageGray.Picture;
-  GImage15.Picture := ImageGray.Picture;
-  GImage16.Picture := ImageGray.Picture;
-  GImage17.Picture := ImageGray.Picture;
-  GImage18.Picture := ImageGray.Picture;
-  GImage19.Picture := ImageGray.Picture;
-  GImage20.Picture := ImageGray.Picture;
-  GImage21.Picture := ImageGray.Picture;
-  GImage22.Picture := ImageGray.Picture;
-  GImage23.Picture := ImageGray.Picture;
-  GImage24.Picture := ImageGray.Picture;
-  GImage25.Picture := ImageGray.Picture;
-  GImage26.Picture := ImageGray.Picture;
-  GImage27.Picture := ImageGray.Picture;
-  GImage28.Picture := ImageGray.Picture;
-  GImage29.Picture := ImageGray.Picture;
-  GImage30.Picture := ImageGray.Picture;
-  GImage31.Picture := ImageGray.Picture;
-  GImage32.Picture := ImageGray.Picture;
-  GImage33.Picture := ImageGray.Picture;
-  GImage34.Picture := ImageGray.Picture;
-  GImage35.Picture := ImageGray.Picture;  }
 end;
+
 {
 procedure TMainFrm.GImage35Click(Sender: TObject);
 var
@@ -199,7 +213,7 @@ procedure TMainFrm.ServerSocket1ClientRead(Sender: TObject;
 var
   List1: TStringList;
   readString: string;
-
+  target:integer;
 begin
   readString := Socket.ReceiveText;
   Memo1.Lines.Add(Socket.RemoteHost + ': ' + readString);
@@ -208,6 +222,11 @@ begin
   List1.Delimiter := ',';
   List1.DelimitedText := readString;
 
+  target:= strtoint(List1[0]);
+  if List1[2] = 'add' then
+  begin
+    myImg[target].Picture := SkyImage.Picture;
+  end;
 end;
 
 procedure TMainFrm.SetIP(const Value: string);
