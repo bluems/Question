@@ -11,41 +11,6 @@ uses
 
 type
   TMainFrm = class(TForm)
-    GImage1: TImage;
-    GImage2: TImage;
-    GImage3: TImage;
-    GImage4: TImage;
-    GImage5: TImage;
-    GImage6: TImage;
-    GImage7: TImage;
-    GImage8: TImage;
-    GImage9: TImage;
-    GImage10: TImage;
-    GImage11: TImage;
-    GImage12: TImage;
-    GImage13: TImage;
-    GImage14: TImage;
-    GImage15: TImage;
-    GImage16: TImage;
-    GImage17: TImage;
-    GImage18: TImage;
-    GImage19: TImage;
-    GImage20: TImage;
-    GImage21: TImage;
-    GImage22: TImage;
-    GImage23: TImage;
-    GImage24: TImage;
-    GImage25: TImage;
-    GImage26: TImage;
-    GImage27: TImage;
-    GImage28: TImage;
-    GImage29: TImage;
-    GImage30: TImage;
-    GImage31: TImage;
-    GImage32: TImage;
-    GImage33: TImage;
-    GImage34: TImage;
-    GImage35: TImage;
     Panel1: TPanel;
     Button1: TButton;
     Button2: TButton;
@@ -67,7 +32,6 @@ type
       Socket: TCustomWinSocket);
     procedure ServerSocket1ClientDisconnect(Sender: TObject;
       Socket: TCustomWinSocket);
-    procedure GImage35Click(Sender: TObject);
   private
     { Private declarations }
     FPort: integer;
@@ -161,7 +125,7 @@ procedure TMainFrm.FormShow(Sender: TObject);
 begin
   IP := My_LocalIP;
   ServerInfoRedraw(IP, Port);
-  GImage1.Picture := ImageGray.Picture;
+ { GImage1.Picture := ImageGray.Picture;
   GImage2.Picture := ImageGray.Picture;
   GImage3.Picture := ImageGray.Picture;
   GImage4.Picture := ImageGray.Picture;
@@ -195,9 +159,9 @@ begin
   GImage32.Picture := ImageGray.Picture;
   GImage33.Picture := ImageGray.Picture;
   GImage34.Picture := ImageGray.Picture;
-  GImage35.Picture := ImageGray.Picture;
+  GImage35.Picture := ImageGray.Picture;  }
 end;
-
+{
 procedure TMainFrm.GImage35Click(Sender: TObject);
 var
 
@@ -211,7 +175,7 @@ begin
     count := false;
     GImage35.Picture := ImageSky.Picture;
   end;
-end;
+end;     }
 
 procedure TMainFrm.ServerInfoRedraw(const Aip: string; const Aport: integer);
 begin
@@ -243,18 +207,6 @@ begin
   List1 := TStringList.Create;
   List1.Delimiter := ',';
   List1.DelimitedText := readString;
-
-  if List1[0] = '35' then
-  begin
-    if List1[2] = 'true' then
-    begin
-      GImage35.Picture := ImageRed.Picture;
-    end else
-    begin
-      GImage35.Picture := ImageSky.Picture;
-    end;
-
-  end;
 
 end;
 
