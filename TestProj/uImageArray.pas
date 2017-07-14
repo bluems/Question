@@ -22,21 +22,23 @@ var
   ResStreamPngGray:TResourceStream;
   ResStreamPngRed:TResourceStream;
   ResStreamPngSky:TResourceStream;
+  DllHandle: THandle;
 
 implementation
 
 {$R *.dfm}
-{$R imgRes.RES}
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   pcList[0]:= timage.Create(form1);
   pcList[0].Canvas.rectangle(0,0,100,100);
+  DllHandle := LoadLibrary('imgRes.dll');
+  ResSTreamPngGray:=TResourceStream.Create(DllHandle, 'btGray','PNG');
 end;
 
 procedure TForm1.PNGLoad;
 begin
-
+   pcList[0].Picture.Bitmap.assign(resStreamPngGray);
 end;
 
 end.
