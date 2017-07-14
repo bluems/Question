@@ -10982,6 +10982,7 @@ object MainFrm: TMainFrm
     ClientType = ctNonBlocking
     Port = 0
     OnConnect = ClientSocket1Connect
+    OnRead = ClientSocket1Read
     Left = 336
     Top = 64
   end

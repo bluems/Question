@@ -22,6 +22,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+    procedure ClientSocket1Read(Sender: TObject; Socket: TCustomWinSocket);
   private
     { Private declarations }
     FPCName: string;
@@ -52,6 +53,27 @@ procedure TMainFrm.ClientSocket1Connect(Sender: TObject;
   Socket: TCustomWinSocket);
 begin
   ClientSocket1.Socket.SendText('Hi, Server');
+end;
+
+procedure TMainFrm.ClientSocket1Read(Sender: TObject; Socket: TCustomWinSocket);
+var
+  List1:TStringList;
+  readString:string;
+begin
+  readString:= Socket.ReceiveText;
+
+  List1:=TStringList.Create;
+  List1.Delimiter:=',';
+  List1.DelimitedText:=readString;
+  if List1[0] = pcname then
+  begin
+    if List1[1] = 'close' then
+    begin
+      Image2Click(sender);
+    end;
+  end;
+
+
 end;
 
 procedure TMainFrm.FormCreate(Sender: TObject);
