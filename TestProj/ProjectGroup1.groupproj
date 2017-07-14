@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AB557FD4-BA61-4700-AE96-B376F550EA7C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="pTestProj.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="serverImgRes.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="pTestProj">
+        <MSBuild Projects="pTestProj.dproj"/>
+    </Target>
+    <Target Name="pTestProj:Clean">
+        <MSBuild Projects="pTestProj.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pTestProj:Make">
+        <MSBuild Projects="pTestProj.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="serverImgRes">
+        <MSBuild Projects="serverImgRes.dproj"/>
+    </Target>
+    <Target Name="serverImgRes:Clean">
+        <MSBuild Projects="serverImgRes.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="serverImgRes:Make">
+        <MSBuild Projects="serverImgRes.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="pTestProj;serverImgRes"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="pTestProj:Clean;serverImgRes:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="pTestProj:Make;serverImgRes:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
