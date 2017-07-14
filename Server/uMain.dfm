@@ -16281,245 +16281,246 @@ object MainFrm: TMainFrm
     Margins.Bottom = 10
     Align = alClient
     TabOrder = 0
-    object Image1: TImage
+    object GImage1: TImage
       Left = 16
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image10: TImage
+    object GImage10: TImage
       Left = 256
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image11: TImage
+    object GImage11: TImage
       Left = 408
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image12: TImage
+    object GImage12: TImage
       Left = 528
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image13: TImage
+    object GImage13: TImage
       Left = 648
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image14: TImage
+    object GImage14: TImage
       Left = 768
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image15: TImage
+    object GImage15: TImage
       Left = 16
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image16: TImage
+    object GImage16: TImage
       Left = 136
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image17: TImage
+    object GImage17: TImage
       Left = 256
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image18: TImage
+    object GImage18: TImage
       Left = 408
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image19: TImage
+    object GImage19: TImage
       Left = 528
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image2: TImage
+    object GImage2: TImage
       Left = 136
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image20: TImage
+    object GImage20: TImage
       Left = 648
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image21: TImage
+    object GImage21: TImage
       Left = 768
       Top = 256
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image22: TImage
+    object GImage22: TImage
       Left = 16
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image23: TImage
+    object GImage23: TImage
       Left = 136
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image24: TImage
+    object GImage24: TImage
       Left = 256
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image25: TImage
+    object GImage25: TImage
       Left = 408
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image26: TImage
+    object GImage26: TImage
       Left = 528
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image27: TImage
+    object GImage27: TImage
       Left = 648
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image28: TImage
+    object GImage28: TImage
       Left = 768
       Top = 376
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image29: TImage
+    object GImage29: TImage
       Left = 16
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image3: TImage
+    object GImage3: TImage
       Left = 256
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image30: TImage
+    object GImage30: TImage
       Left = 136
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image31: TImage
+    object GImage31: TImage
       Left = 256
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image32: TImage
+    object GImage32: TImage
       Left = 408
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image33: TImage
+    object GImage33: TImage
       Left = 528
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image34: TImage
+    object GImage34: TImage
       Left = 648
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image35: TImage
+    object GImage35: TImage
       Left = 768
       Top = 496
       Width = 105
       Height = 105
       Stretch = True
+      OnClick = GImage35Click
     end
-    object Image4: TImage
+    object GImage4: TImage
       Left = 408
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image5: TImage
+    object GImage5: TImage
       Left = 528
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image6: TImage
+    object GImage6: TImage
       Left = 648
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image7: TImage
+    object GImage7: TImage
       Left = 768
       Top = 16
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image8: TImage
+    object GImage8: TImage
       Left = 16
       Top = 136
       Width = 105
       Height = 105
       Stretch = True
     end
-    object Image9: TImage
+    object GImage9: TImage
       Left = 136
       Top = 136
       Width = 105
@@ -16539,6 +16540,15 @@ object MainFrm: TMainFrm
       Font.Style = []
       ParentFont = False
       Transparent = True
+    end
+    object Memo1: TMemo
+      Left = 336
+      Top = 607
+      Width = 177
+      Height = 47
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 0
     end
   end
   object Button1: TButton
@@ -16567,13 +16577,6 @@ object MainFrm: TMainFrm
     Caption = 'Run'
     TabOrder = 3
     OnClick = Button3Click
-  end
-  object Memo1: TMemo
-    Left = 16
-    Top = 16
-    Width = 859
-    Height = 585
-    TabOrder = 4
   end
   object ServerSocket1: TServerSocket
     Active = False
