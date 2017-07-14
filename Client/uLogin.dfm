@@ -785,10 +785,10 @@ object LoginFrm: TLoginFrm
   end
   object SpeedButton1: TSpeedButton
     Left = 48
-    Top = 266
+    Top = 276
     Width = 305
-    Height = 60
-    Caption = 'Login'
+    Height = 50
+    Caption = 'LOGIN'
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -803,7 +803,7 @@ object LoginFrm: TLoginFrm
     Top = 332
     Width = 305
     Height = 60
-    Caption = 'Exit'
+    Caption = 'EXIT'
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
