@@ -16281,8 +16281,6 @@ object MainFrm: TMainFrm
     Margins.Bottom = 10
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = -15
-    ExplicitTop = 8
     object Image1: TImage
       Left = 16
       Top = 16
@@ -16570,10 +16568,19 @@ object MainFrm: TMainFrm
     TabOrder = 3
     OnClick = Button3Click
   end
+  object Memo1: TMemo
+    Left = 16
+    Top = 16
+    Width = 859
+    Height = 585
+    TabOrder = 4
+  end
   object ServerSocket1: TServerSocket
     Active = False
     Port = 3030
     ServerType = stNonBlocking
+    OnClientConnect = ServerSocket1ClientConnect
+    OnClientDisconnect = ServerSocket1ClientDisconnect
     OnClientRead = ServerSocket1ClientRead
     Left = 368
     Top = 176

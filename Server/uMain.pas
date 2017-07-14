@@ -55,12 +55,17 @@ type
     ImageSky: TImage;
     ImageGray: TImage;
     ServerSocket1: TServerSocket;
+    Memo1: TMemo;
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure ServerSocket1ClientRead(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket1ClientConnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket1ClientDisconnect(Sender: TObject;
       Socket: TCustomWinSocket);
   private
     { Private declarations }
@@ -108,19 +113,19 @@ end;
 
 procedure TMainFrm.Button1Click(Sender: TObject);
 var
-  SettingsFrm: TSettingsFrm;
+  LSettingsFrm: TSettingsFrm;
 begin
-  SettingsFrm := TSettingsFrm.Create(self);
-  SettingsFrm.Port := Port;
+  LSettingsFrm := TSettingsFrm.Create(self);
+  LSettingsFrm.Port := Port;
   try
-    if SettingsFrm.ShowModal = mrOk then
+    if LSettingsFrm.ShowModal = mrOk then
     begin
-      Port := SettingsFrm.Port;
+      Port := LSettingsFrm.Port;
     end;
     showmessage(inttostr(Port));
   finally
-    SettingsFrm.Free;
-    SettingsFrm := nil;
+    LSettingsFrm.Destroy;
+    LSettingsFrm := nil;
     ServerInfoRedraw(IP, Port);
   end;
 
@@ -162,10 +167,22 @@ begin
   lblIP.Caption := 'IP : ' + Aip + ' / Port : ' + inttostr(Aport);
 end;
 
+procedure TMainFrm.ServerSocket1ClientConnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  memo1.Lines.Add('Connect: '+socket.RemoteHost);
+end;
+
+procedure TMainFrm.ServerSocket1ClientDisconnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  memo1.Lines.Add('Disconnected: '+socket.RemoteHost);
+end;
+
 procedure TMainFrm.ServerSocket1ClientRead(Sender: TObject;
   Socket: TCustomWinSocket);
 begin
-  showmessage(Socket.ReceiveText);
+  memo1.Lines.Add(socket.RemoteHost+': '+socket.ReceiveText);
 end;
 
 procedure TMainFrm.SetIP(const Value: string);

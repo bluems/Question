@@ -15,8 +15,13 @@ type
     Label2: TLabel;
     Image1: TImage;
     ClientSocket1: TClientSocket;
+    Image2: TImage;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ClientSocket1Connect(Sender: TObject; Socket: TCustomWinSocket);
+    procedure FormShow(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
   private
     { Private declarations }
     FPCName: string;
@@ -31,6 +36,8 @@ type
 
 var
   MainFrm: TMainFrm;
+  sHost: string = '127.0.0.1';
+  sPort: integer = 3030;
 
 implementation
 
@@ -41,18 +48,43 @@ begin
   application.Terminate;
 end;
 
-
+procedure TMainFrm.ClientSocket1Connect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  ClientSocket1.Socket.SendText('Hi, Server');
+end;
 
 procedure TMainFrm.FormCreate(Sender: TObject);
 var
-  ScrWidth:integer;
-  ScrHeight:integer;
+  ScrWidth: integer;
+  ScrHeight: integer;
 begin
-  ScrWidth:=screen.WorkAreaWidth;
-  ScrHeight:=screen.WorkAreaHeight;
+  ScrWidth := screen.WorkAreaWidth;
+  ScrHeight := screen.WorkAreaHeight;
 
   MainFrm.Top := ScrHeight - MainFrm.Height;
   MainFrm.Left := ScrWidth - MainFrm.Width;
+
+  ClientSocket1.Host := sHost;
+  ClientSocket1.Port := sPort;
+end;
+
+procedure TMainFrm.FormShow(Sender: TObject);
+begin
+  ClientSocket1.Active := true;
+
+end;
+
+procedure TMainFrm.Image1Click(Sender: TObject);
+begin
+    ClientSocket1.Socket.SendText(pcName + ',' + userName + ',true');
+    Image2.Visible := true;
+end;
+
+procedure TMainFrm.Image2Click(Sender: TObject);
+begin
+  ClientSocket1.Socket.SendText(pcName + ',' + userName + ',false');
+  Image2.Visible := false;
 end;
 
 procedure TMainFrm.SetPCName(const AValue: string);
