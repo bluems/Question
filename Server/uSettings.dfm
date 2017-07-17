@@ -2,8 +2,8 @@ object SettingsFrm: TSettingsFrm
   Left = 0
   Top = 0
   Caption = #49444#51221
-  ClientHeight = 172
-  ClientWidth = 225
+  ClientHeight = 322
+  ClientWidth = 263
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,8 +27,34 @@ object SettingsFrm: TSettingsFrm
     Font.Style = []
     ParentFont = False
   end
+  object Label2: TLabel
+    Left = 32
+    Top = 96
+    Width = 69
+    Height = 33
+    Caption = 'Name'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 32
+    Top = 144
+    Width = 70
+    Height = 33
+    Caption = 'Room'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object Edit1: TEdit
-    Left = 96
+    Left = 112
     Top = 45
     Width = 121
     Height = 41
@@ -43,8 +69,8 @@ object SettingsFrm: TSettingsFrm
     OnKeyUp = Edit1KeyUp
   end
   object Button1: TButton
-    Left = 40
-    Top = 112
+    Left = 48
+    Top = 265
     Width = 75
     Height = 49
     Caption = 'Apply'
@@ -54,7 +80,7 @@ object SettingsFrm: TSettingsFrm
   end
   object Button2: TButton
     Left = 142
-    Top = 112
+    Top = 265
     Width = 75
     Height = 49
     Caption = 'Cancel'
@@ -66,8 +92,37 @@ object SettingsFrm: TSettingsFrm
     Top = 14
     Width = 75
     Height = 25
-    Caption = 'Button3'
+    Caption = 'Debug Message'
+    Enabled = False
     TabOrder = 3
     OnClick = Button3Click
+  end
+  object Edit2: TEdit
+    Left = 112
+    Top = 92
+    Width = 121
+    Height = 41
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    OnKeyUp = Edit1KeyUp
+  end
+  object Edit3: TEdit
+    Left = 112
+    Top = 139
+    Width = 121
+    Height = 41
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    OnKeyUp = Edit1KeyUp
   end
 end
