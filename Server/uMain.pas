@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   Vcl.StdCtrls, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer,
-  System.Win.ScktComp, System.ImageList, Vcl.ImgList;
+  System.Win.ScktComp, System.ImageList, Vcl.ImgList, IdTCPConnection,
+  IdTCPClient, IdHTTP;
 
 type
   TMainFrm = class(TForm)
@@ -56,6 +57,7 @@ type
     GrayImage: TImage;
     RedImage: TImage;
     SkyImage: TImage;
+    IdHTTP1: TIdHTTP;
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,7 +73,9 @@ type
     { Private declarations }
     FPort: integer;
     FIP: string;
-    imgCount:integer;
+    FAdminName: string;
+    FRoom: string;
+    imgCount: integer;
     myImg: array of TImage;
   public
     { Public declarations }
@@ -80,6 +84,8 @@ type
     procedure ServerInfoRedraw(Const Aip: string; Const Aport: integer);
     property Port: integer read FPort write SetPort;
     property IP: string read FIP write SetIP;
+    property AdminName: string read FAdminName;
+    Property Room: string read FRoom;
   end;
 
 var
@@ -119,10 +125,14 @@ var
 begin
   LSettingsFrm := TSettingsFrm.Create(self);
   LSettingsFrm.Port := Port;
+  LSettingsFrm.AdminName := AdminName;
+  LSettingsFrm.Room := Room;
   try
     if LSettingsFrm.ShowModal = mrOk then
     begin
       Port := LSettingsFrm.Port;
+      FAdminName := LSettingsFrm.AdminName;
+      FRoom := LSettingsFrm.Room;
     end;
     showmessage(inttostr(Port));
   finally
@@ -139,9 +149,33 @@ begin
 end;
 
 procedure TMainFrm.Button3Click(Sender: TObject);
+var
+  sList: TStringList;
+  ResponseStream: TMemoryStream;
+  resultBytes: TBytes;
 begin
   if ServerSocket1.Active = false then
   begin
+    sList:=TStringList.Create;
+    ResponseStream := TStringStream.Create;
+    try
+      idHttp1.Request.ContentType := 'application/x-www-form-urlencoded';
+      sList.Add('adminname=' + AdminName);
+      sList.Add('port=' + inttostr(port));
+      sList.Add('room=' + room);
+      idhttp1.Post('http://git.kunsan.ac.kr:9090/question/ServerAdd.php',sList,ResponseStream);
+      ResponseStream.Position := 0;
+
+      SetLength(resultBytes,ResponseStream.Size);
+      ResponseStream.ReadBuffer(resultBytes[0],Length(resultBytes));
+
+      showmessage(TEncoding.UTF8.GetString(resultBytes));
+    finally
+      sList.Free;
+      ResponseStream.Free;
+    end;
+
+
     ServerSocket1.Port := Port;
     ServerSocket1.Active := true;
     (Sender As TButton).Caption := 'Stop';
@@ -155,17 +189,16 @@ end;
 
 procedure TMainFrm.FormCreate(Sender: TObject);
 var
-  i:integer;
+  i: integer;
 begin
   Port := 3030;
-  SetLength(myImg,36);
+  SetLength(myImg, 36);
   for i := 1 to 35 do
-    begin
-       myImg[i]:=(FindComponent('Image'+inttostr(i)) as Timage);
-       myImg[i].Stretch:=true;
-       myImg[i].Picture:=GrayImage.Picture;
-    end;
-
+  begin
+    myImg[i] := (FindComponent('Image' + inttostr(i)) as TImage);
+    myImg[i].Stretch := true;
+    myImg[i].Picture := GrayImage.Picture;
+  end;
 
 end;
 
@@ -176,20 +209,20 @@ begin
 end;
 
 {
-procedure TMainFrm.GImage35Click(Sender: TObject);
-var
+  procedure TMainFrm.GImage35Click(Sender: TObject);
+  var
 
-begin
+  begin
   if count = false then
   begin
-    count := true;
-    //해결중 표시
+  count := true;
+  //해결중 표시
   end else
   begin
-    count := false;
-    GImage35.Picture := ImageSky.Picture;
+  count := false;
+  GImage35.Picture := ImageSky.Picture;
   end;
-end;     }
+  end; }
 
 procedure TMainFrm.ServerInfoRedraw(const Aip: string; const Aport: integer);
 begin
@@ -213,7 +246,7 @@ procedure TMainFrm.ServerSocket1ClientRead(Sender: TObject;
 var
   List1: TStringList;
   readString: string;
-  target:integer;
+  target: integer;
 begin
   readString := Socket.ReceiveText;
   Memo1.Lines.Add(Socket.RemoteHost + ': ' + readString);
@@ -222,7 +255,7 @@ begin
   List1.Delimiter := ',';
   List1.DelimitedText := readString;
 
-  target:= strtoint(List1[0]);
+  target := strtoint(List1[0]);
   if List1[2] = 'add' then
   begin
     myImg[target].Picture := SkyImage.Picture;
