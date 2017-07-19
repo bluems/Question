@@ -1,8 +1,8 @@
 ﻿<?php
 	//DB Add
 	class DBConn { // DB 접속 클래스
-		const db_id = ""; // DB 계정명
-		const db_pw = ""; // DB 비밀번호
+		const db_id = "question"; // DB 계정명
+		const db_pw = "questksac@"; // DB 비밀번호
 		const serverTable = "server"; //DB 테이블
 
 		// DB 접속 설정
