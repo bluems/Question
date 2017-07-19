@@ -99,7 +99,7 @@
 
 	$DBConn = new DBConn();
 	$ErrorLog = new ErrorLog();
-	$ErrorLog -> Add("test","test2");
+	//$ErrorLog -> Add("test","test2");
 	
 	//변수 체크
 	if (isset($_GET['adminname'])){
@@ -122,16 +122,26 @@
 	if ($DBConn->Check($AdminName,$Room)) {
 		//echo "true";
 		//중복 확인
+
 		//정보 갱신
-		$DBConn->Update($AdminName, $ip, $Port, $Room);
+		if ($DBConn->Update($AdminName, $ip, $Port, $Room)) {
+			//true
+		}
 
 	}
 	else {
 		//echo "false";
 		//정보 추가
+		
 	}
 
-	if ($ErrorLog -> ErrorCount > 0)
-		$ErrorLog -> JSONToPrint();
+	if(isset($ErrorLog)) { // ErrorLog가 있으면
+		if ($ErrorLog -> ErrorCount > 0)
+		{
+			$ErrorLog -> JSONToPrint();	// Error Json 출력
+		}
+	}
+
+	
 
 ?>
