@@ -97,49 +97,94 @@
 		}
 	}
 
-	$DBConn = new DBConn();
-	$ErrorLog = new ErrorLog();
-	//$ErrorLog -> Add("test","test2");
-	
-	//변수 체크
-	if (isset($_GET['adminname'])){
+	function main($ErrorLog){
+		$DBConn = new DBConn();
+
 		$AdminName = $_GET['adminname'];
+		$Port = $_GET['port'];
+		$Room = $_GET['room'];
+		$ip = $_GET['ip'];
+		//echo $Valued -> $adminname;
+
+		if (isset($_GET['confirm'])){
+			if(empty($_GET['confirm'])===false) {
+				$ErrorLog -> Add("NoValue","confirm is not set");
+			}
+			$confirm = $_GET['confirm'];
+		} else
+		{
+			$confirm = "0";
+		}
+		$ErrorLog -> JSONToPrint();
+
+			//이미 있는지 체크
+		if ($DBConn->Check($AdminName,$Room)) {
+			//echo "true";
+			//중복 확인
+			if ($confirm === "0") {
+				//재확인
+				
+			} else {
+				//정보 갱신
+				if ($DBConn->Update($AdminName, $ip, $Port, $Room)) {
+					//true
+					echo "false";
+				}
+			}
+
+			
+
+		} else
+		{
+			//echo "false";
+			//정보 추가
+			
+		}
+	}
+
+	$ErrorLog = new ErrorLog();
+
+	if (isset($_GET['adminname'])){
+		if(empty($_GET['adminname'])) {
+			$ErrorLog -> Add("NoValue","adminname is not set");
+		}
 	} else
 	{
-
+		$ErrorLog -> Add("UnDefined","Undefined variable: adminname");
 	}
+
 	if (isset($_GET['port'])) {
-		$Port = $_GET['port'];	
+		if(empty($_GET['port'])) {
+			$ErrorLog -> Add("NoValue","port is not set");
+		}	
+	} else
+	{
+		$ErrorLog -> Add("UnDefined","Undefined variable: port");
 	}
+
 	if (isset($_GET['room'])) {
-		$Room = $_GET['room'];
+		if(empty($_GET['room'])) {
+			$ErrorLog -> Add("NoValue","room is not set");
+		}
+	} else
+	{
+		$ErrorLog -> Add("UnDefined","Undefined variable: room");
 	}
+
 	if (isset($_GET['ip'])) {
-		$ip = $_GET['ip'];
+		if(empty($_GET['ip'])) {
+			$ErrorLog -> Add("NoValue","ip is not set");
+		} 
+	} else
+	{
+		$ErrorLog -> Add("UnDefined","Undefined variable: ip");
 	}
 
-	//이미 있는지 체크
-	if ($DBConn->Check($AdminName,$Room)) {
-		//echo "true";
-		//중복 확인
-
-		//정보 갱신
-		if ($DBConn->Update($AdminName, $ip, $Port, $Room)) {
-			//true
-		}
-
-	}
-	else {
-		//echo "false";
-		//정보 추가
-		
-	}
-
-	if(isset($ErrorLog)) { // ErrorLog가 있으면
-		if ($ErrorLog -> ErrorCount > 0)
-		{
-			$ErrorLog -> JSONToPrint();	// Error Json 출력
-		}
+	if ($ErrorLog -> ErrorCount > 0) {
+		$ErrorLog -> JSONToPrint();
+	} else 
+	{
+		main($ErrorLog);
 	}
 
 	
