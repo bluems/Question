@@ -62,7 +62,7 @@ require_once("DBConn.php");
 		$ErrorLog -> JSONToPrint();
 	} else 
 	{
-		main($ErrorLog);
+		main();
 	}
 
 	
