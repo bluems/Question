@@ -25,7 +25,7 @@ require_once("SuccessLog.php");
 		}
 
 
-		function Add($AdminName, $ip, $Port, $Room)
+		function RoomAdd($AdminName, $ip, $Port, $Room)
 		{	//DB에 정보 추가 
 			$query = "INSERT INTO `".self::serverTable."` (`num`, `room`, `name`, `ip`, `port`) VALUES (NULL, '".$Room."', '".$AdminName."', '".$ip."', '".$Port."')";
 
@@ -45,7 +45,7 @@ require_once("SuccessLog.php");
 			}
 		}
 
-		function Check($AdminName, $Room) {
+		function RoomCheck($AdminName, $Room) {
 			// DB에 정보 유무 체크
 			$query = "select * from server where room=:room and name=:adminName";
 
@@ -70,7 +70,7 @@ require_once("SuccessLog.php");
 			}
 		}
 
-		function Update($AdminName, $ip, $Port, $Room) {
+		function RoomUpdate($AdminName, $ip, $Port, $Room) {
 			// DB에 정보 최신화 갱신
 			$query = "UPDATE `".self::serverTable."` SET `ip` = '".$ip."', `port` = ".$Port." WHERE `name` = '".$AdminName."' and `room` = '".$Room."'";
 

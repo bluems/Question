@@ -27,7 +27,7 @@ require_once("DBConn.php");
 		//$ErrorLog -> JSONToPrint();
 
 			//이미 있는지 체크
-		if ($DBConn->Check($AdminName,$Room)) {
+		if ($DBConn->RoomCheck($AdminName,$Room)) {
 			//echo "true";
 			//중복 확인
 			if ($confirm === "0") {
@@ -35,7 +35,7 @@ require_once("DBConn.php");
 				
 			} else {
 				//정보 갱신
-				if ($DBConn->Update($AdminName, $ip, $Port, $Room)) {
+				if ($DBConn->RoomUpdate($AdminName, $ip, $Port, $Room)) {
 					//true
 					$ErrorLog->JSONToPrint();
 				}
@@ -44,7 +44,7 @@ require_once("DBConn.php");
 		{
 			//echo "false";
 			//정보 추가
-			$DBConn->Add($AdminName,$ip,$Port,$Room);
+			$DBConn->RoomAdd($AdminName,$ip,$Port,$Room);
 			
 		}
 	}
